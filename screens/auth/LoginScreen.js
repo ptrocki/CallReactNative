@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Alert, TextInput, Button } from 'react-native';
+import { SecureStore } from 'expo';
+import Const from '../../constants/Const'
 
 export default class LoginScreen extends React.Component {
 
@@ -40,6 +42,7 @@ export default class LoginScreen extends React.Component {
     onLogin() {
         const { username, password } = this.state;
         if (username && password) {
+            SecureStore.setItemAsync(Const.tokenKey,'someToken');
             this.props.navigation.navigate('Main');
         } else {
             Alert.alert('Credentials are empty');
