@@ -39,7 +39,11 @@ export default class LoginScreen extends React.Component {
 
     onLogin() {
         const { username, password } = this.state;
-        Alert.alert('Credentials', `${username} : ${password}`);
+        if (username && password) {
+            this.props.navigation.navigate('Main');
+        } else {
+            Alert.alert('Credentials are empty');
+        }
       }
 }
 
