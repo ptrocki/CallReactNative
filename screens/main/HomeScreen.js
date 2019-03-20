@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   FlatList,
   StyleSheet,
-  Text, ListItem,
-  TouchableOpacity,
+  Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { Constants } from 'expo';
@@ -18,6 +16,11 @@ export default class HomeScreen extends React.Component {
   };
   state = { randomPeople: [] }
 
+  constructor(props) {
+    super(props)
+    this.onCellClick = this.onCellClick.bind(this);
+    this.renderCell = this.renderCell.bind(this);
+  }
 
   componentDidMount() {
     axios.get(`https://randomuser.me/api?results=10`)
@@ -29,14 +32,25 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList style = {{padding: 10}}
+        <FlatList style={{ padding: 10 }}
           keyExtractor={(item, index) => index.toString()}
           data={this.state.randomPeople}
-          renderItem={({ item }) => <Text style={{ padding:10}}>
-          {item.email}
-          </Text>}
+          renderItem={({ item }) => this.renderCell(item)}
         /></View>
     );
+  }
+
+  renderCell(item) {
+    return (
+      <TouchableWithoutFeedback onPress={ () => this.onCellClick(item)} >
+        <Text style={{ padding: 10 }}>
+          {item.email}
+        </Text>
+      </TouchableWithoutFeedback>);
+  }
+
+  onCellClick(item) {
+    this.props.navigation.push('Details', {otherParam: item});
   }
 }
 const styles = StyleSheet.create({
