@@ -9,6 +9,11 @@ export default class SettingsScreen extends React.Component {
     header: null,
   };
 
+  constructor(props){
+    super(props)
+    this._onPressButton = this._onPressButton.bind(this);
+  }
+
   render() {
     return (
       <View style={styles.container}>
