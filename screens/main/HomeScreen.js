@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios';
-import Layout from '../../constants/Layout'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -50,7 +49,7 @@ export default class HomeScreen extends React.Component {
   }
 
   onCellClick(item) {
-    this.props.navigation.push('Details', {otherParam: item});
+    this.props.navigation.push('Details', {detailscreenparam: item});
   }
 }
 const styles = StyleSheet.create({

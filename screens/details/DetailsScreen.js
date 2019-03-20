@@ -11,7 +11,7 @@ export default class DetailsScreen extends React.Component {
 
     render() {
         const { navigation } = this.props;
-        const person = navigation.getParam('otherParam', 'some default value');
+        const person = navigation.getParam('detailscreenparam', 'some default value');
 
         const name = person.name.title+ " " + person.name.first+ " " + person.name.last
         const sections = [
